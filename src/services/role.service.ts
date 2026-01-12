@@ -14,3 +14,16 @@ const result = new Role (payload);
 
   return result.save();
 }
+
+
+
+
+export const updateRole = async(id: String, payload: Partial <IRole>)=>{
+  return Role.findByIdAndUpdate(id, payload, {new: true})
+}
+
+
+
+export const deleteRole = async(id:string) =>{
+  return Role.findByIdAndDelete(id);
+}

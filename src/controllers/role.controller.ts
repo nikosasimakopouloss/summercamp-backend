@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import *  as roleService from '../services/role.service';
+import *  as roleService from "../services/role.service";
 
 
 export const list = async (req: Request, res: Response, next: NextFunction)=> {
@@ -21,7 +21,31 @@ try {
   const result = await roleService.createRole(req.body);
   res.status(200).json(result);
 } catch(err) {
-  next(err);
+  res.status(401).json({"Error": err})
+  // next(err);
+  }
+}
+
+
+
+export const update = async (req: Request, res: Response, next: NextFunction)=> {
+try {
+   
+  const result = await roleService.updateRole(req.params.id as string , req.body);
+  res.status(201).json(result);
+} catch(err) {
+  res.status(401).json({"Error": err})
+  // next(err);
+  }
+}
+
+
+export const remove = async(req:Request, res:Response, next:NextFunction ) => {
+  try {
+    const result = await roleService.deleteRole(req.params.id as string );
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
   }
 }
 
