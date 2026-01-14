@@ -1,7 +1,7 @@
 import {Router} from "express"
 import * as roleCtrl from "../controllers/role.controller"
 import { validate } from '../middlewares/validate.middleware';
-import { validateObjectId } from "../middlewares/validateObjectid.middleware";
+import { validateObjectId } from "../middlewares/validateObjectId.middleware"
 import { createRoleSchema, updateRoleSchema } from "../validators/role.validator";
 import { authenticate } from '../middlewares/auth.middleware';
 
