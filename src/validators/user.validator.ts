@@ -14,14 +14,27 @@ export const addressSchema = z.object({
 });
 
 export const createUserSchema = z.object({
-  username: z.string().min(3),
-  password: z.string().min(5),
+  username: z.string()
+    .min(3, 'Username must be at least 3 characters')
+    .max(20, 'Username cannot exceed 20 characters'),
+  password: z.string()
+    .min(5, 'Password must be at least 5 characters'),
   firstname: z.string().optional(),
   lastname: z.string().optional(),
-  email: z.string().email().optional(),
+  amka: z.string()
+    .regex(/^\d{11}$/, 'AMKA must be exactly 11 digits'),
+  email: z.string()
+    .email('Invalid email format')
+    .optional()
+    .or(z.literal('')),
   address: addressSchema.optional(),
   phone: z.array(phoneSchema).optional(),
-  roles: z.array(z.string()).optional()
+  roles: z.array(z.string()).optional().default([])
 });
 
 export const updateUserSchema = createUserSchema.partial();
+
+// AMKA validation for both body (POST) and query (GET)
+export const checkAmkaSchema = z.object({
+  amka: z.string().regex(/^\d{11}$/, 'AMKA must be exactly 11 digits')
+});
