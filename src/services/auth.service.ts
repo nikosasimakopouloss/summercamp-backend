@@ -24,7 +24,7 @@ export const login = async (username: string, password: string) => {
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '24h' });
 
   const userWithoutPassword = user.toObject();
-  // delete userWithoutPassword.password;
+  //  delete userWithoutPassword.password;
 
   return { user: userWithoutPassword, token };
 };
