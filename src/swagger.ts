@@ -4,6 +4,7 @@ import mongooseToSwagger from "mongoose-to-swagger";
 import {Express} from 'express';
 import Role from './models/role.model';
 import User from './models/user.model';
+import { Camper, Registration } from "./models/registration.model";
 
 const options: swaggerJSDoc.Options = {
   definition: {
@@ -29,7 +30,10 @@ const options: swaggerJSDoc.Options = {
       },
       "schemas": {
         User: mongooseToSwagger(User),
-        Role: mongooseToSwagger(Role)
+        Role: mongooseToSwagger(Role),
+       Camper: mongooseToSwagger(Camper),        // Add Camper schema
+        Registration: mongooseToSwagger(Registration) // Add Registration schema
+
       }
     },
     security: [{bearerAuth:[]}],
