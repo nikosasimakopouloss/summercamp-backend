@@ -31,7 +31,7 @@ const options: swaggerJSDoc.Options = {
       "schemas": {
         User: mongooseToSwagger(User),
         Role: mongooseToSwagger(Role),
-       Camper: mongooseToSwagger(Camper),        // Add Camper schema
+        Camper: mongooseToSwagger(Camper),        // Add Camper schema
         Registration: mongooseToSwagger(Registration) // Add Registration schema
 
       }
