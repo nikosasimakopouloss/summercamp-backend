@@ -46,10 +46,77 @@ export const removeAny = async (req: Request, res: Response, next: NextFunction)
 
 export const listMyRegistrations = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const userId = req.user.userId;
+
+console.log('\n🔍 ===== DEBUG START: listMyRegistrations =====');
+    console.log('🔍 Request user object:', req.user);
+    console.log('🔍 Request user type:', typeof req.user);
+    
+    // Try multiple possible keys
+    const userId = req.user?.userId || req.user?.id || req.user?._id || req.user?.sub;
+    console.log('🔍 Extracted userId:', userId);
+    console.log('🔍 userId type:', typeof userId);
+    
+
+
+
+  // const userId = req.user.userId;
+
+
+  if (!userId) {
+      console.error('❌ ERROR: No userId found in request user object');
+      console.log('❌ Available keys:', Object.keys(req.user || {}));
+      return res.status(401).json({ message: 'User ID not found in token' });
+    }
+
+    
+
+    console.log(`🔍 Calling service with userId: ${userId}`);
+    console.log(`🔍 userId length: ${userId.length}`);
+
+
+
+
+
+
     const result = await registrationService.findRegistrationsByUser(userId);
+   
+   
+   
+   console.log(`✅ Service returned ${result?.length || 0} registrations`)
+    
+    if (result && result.length > 0) {
+      result.forEach((reg: any, index: number) => {
+        console.log(`📝 Registration ${index + 1}:`);
+        console.log(`   - Registration ID: ${reg._id}`);
+        console.log(`   - User field type: ${typeof reg.user}`);
+        console.log(`   - User ID: ${reg.user?._id || reg.user}`);
+        console.log(`   - Username: ${reg.user?.username || 'N/A'}`);
+      });
+    } else {
+      console.log('📭 No registrations found for this user');
+    }
+    
+    console.log('===== DEBUG END =====\n');
+
+
+   
+   
+   
     res.status(200).json(result);
-  } catch (err) {
+
+
+
+
+    
+
+
+
+
+  } catch (err: any) {
+
+  console.error('❌ Error in listMyRegistrations:', err);
+  console.error('❌ Stack trace:', err.stack);
+
     res.status(400).json(err);
   }
 };
