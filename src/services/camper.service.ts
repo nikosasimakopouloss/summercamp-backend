@@ -44,7 +44,10 @@ export const updateCamper = async (id: string, payload: Partial<ICamper>) => {
 };
 
 export const deleteCamper = async (id: string) => {
-  const { Registration } = await import("./registration.service.js");
+  // const { Registration } = await import("./registration.service.js");
+  const { Registration } = require("./registration.service")
+  
+  
   const registrations = await Registration.find({ camper: id });
 
   if (registrations.length > 0) {
