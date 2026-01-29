@@ -4,12 +4,25 @@
     // File Layout
      "rootDir": "./src",
      "outDir": "./dist",
+     
+
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
     "target": "esnext",
-    "types": ["express", "node", "morgan", "jest"],
+    "types": [
+      "express", 
+      "node", 
+      "morgan", 
+      "jest",
+      "cors",
+      "jsonwebtoken",
+      "mongoose",
+      "swagger-ui-express",
+      "swagger-jsdoc",
+      "supertest"
+    ],
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
