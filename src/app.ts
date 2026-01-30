@@ -22,7 +22,12 @@ app.use(express.json());
 
 app.use(cors({
   // origin: '*'
-  origin: ['http://localhost:4200']
+  origin: ['http://localhost:4200', 
+    
+    'https://nikosasimakopouloss.github.io'
+
+         
+  ]
 }));
 
 app.use('/api/users', userRoutes)
